@@ -103,10 +103,11 @@ when promptBasic:
   proc keyProcessing(self: var Noise, c: char32): EditMode =
     result = editOK
     for editProc in self.procs:
-      let mode = editProc(self, c)
-      if mode != editNext:
-        result = mode
-        break
+      {.gcsafe.}:
+        let mode = editProc(self, c)
+        if mode != editNext:
+          result = mode
+          break
 
   proc getInputLine(self: var Noise): bool =
     # The latest history entry is always our current buffer

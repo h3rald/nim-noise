@@ -12,8 +12,9 @@ when promptCompletion:
     let parts = self.line.breakWord()
     if parts.word.len == 0: return 0
 
-    discard self.completionHook(self, parts.word)
-    if self.completionStrings.len == 0: return 0
+    {.gcsafe.}:
+      discard self.completionHook(self, parts.word)
+      if self.completionStrings.len == 0: return 0
 
     var index = 0
     self.line.updateCompletion(parts.head &
