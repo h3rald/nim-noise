@@ -168,7 +168,8 @@ type
 proc doDispatch(ctx: var EscapeCtx, c: char32, chars: string, dispatchTable: openArray[DispatchProc]): char32 =
   assert(chars.len + 1 == dispatchTable.len)
   for i, x in chars:
-    if x.char32 == c: return dispatchTable[i](ctx, c)
+    {.gcsafe.}:
+      if x.char32 == c: return dispatchTable[i](ctx, c)
   {.gcsafe.}:
     dispatchTable[^1](ctx, c)
 
