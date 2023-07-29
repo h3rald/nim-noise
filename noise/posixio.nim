@@ -352,7 +352,8 @@ proc escProc(ctx: var EscapeCtx, c: char32): char32 =
   readOrRet()
   ctx.doDispatch(c, escDispatch)
 
-let initialDispatch = ("\x1B\x7F", [
+var initialDispatch {.threadvar.} : (string, array[0..2, DispatchProc])
+initialDispatch = ("\x1B\x7F", [
   escProc.DispatchProc, deleteCharProc, normalKeyProc])
 
 # Special handling for the ESC key because it does double duty
