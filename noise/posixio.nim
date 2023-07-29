@@ -16,7 +16,8 @@ type
     gotResize: bool
     atQuitRegistered: bool
 
-var gIoCtx = IoCtx(nil)
+var gIoCtx {.threadvar.}: IoCtx 
+gIoCtx = IoCtx(nil)
 
 proc newIoCtxAux(): IoCtx =
   new(result)
