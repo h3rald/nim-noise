@@ -6,7 +6,7 @@
 #    distribution, for details about the copyright.
 #
 
-import terminal, winlean, wtf8, basic, strutils, os
+import terminal, winlean, wtf8, basic, os
 
 type
   SHORT = int16

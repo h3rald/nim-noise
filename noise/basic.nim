@@ -6,7 +6,7 @@
 #    distribution, for details about the copyright.
 #
 
-import wtf8, wcwidth, os, strutils, unicode
+import os, strutils, unicode
 
 type
   char32* = int32

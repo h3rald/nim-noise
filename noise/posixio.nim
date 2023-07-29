@@ -169,7 +169,8 @@ proc doDispatch(ctx: var EscapeCtx, c: char32, chars: string, dispatchTable: ope
   assert(chars.len + 1 == dispatchTable.len)
   for i, x in chars:
     if x.char32 == c: return dispatchTable[i](ctx, c)
-  dispatchTable[^1](ctx, c)
+  {.gcsafe.}:
+    dispatchTable[^1](ctx, c)
 
 template doDispatch(ctx: var EscapeCtx, c: char32, x: typed): char32 =
   ctx.doDispatch(c, x[0], x[1])

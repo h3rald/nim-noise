@@ -214,8 +214,6 @@ proc utf8to32*(str: string, output: var seq[int32], pos, len: int): int =
     if i == len: break
   result = i
 
-import strutils
-
 proc utf32to8*(se: openArray[int32]): string =
   result = ""
   for cp in se:
